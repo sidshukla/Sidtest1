@@ -8,7 +8,7 @@ public class Transaction {
 
 	private long transactionId;
 
-	private long ean;
+	private String ean;
 
 	private int quantity;
 
@@ -28,11 +28,11 @@ public class Transaction {
 		this.transactionId = transactionId;
 	}
 
-	public long getEan() {
+	public String getEan() {
 		return ean;
 	}
 
-	public void setEan(long ean) {
+	public void setEan(String ean) {
 		this.ean = ean;
 	}
 
@@ -48,7 +48,7 @@ public class Transaction {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (ean ^ (ean >>> 32));
+		result = prime * result + ((ean == null) ? 0 : ean.hashCode());
 		result = prime * result + quantity;
 		result = prime * result
 				+ ((transactionDate == null) ? 0 : transactionDate.hashCode());
@@ -66,7 +66,10 @@ public class Transaction {
 		if (getClass() != obj.getClass())
 			return false;
 		Transaction other = (Transaction) obj;
-		if (ean != other.ean)
+		if (ean == null) {
+			if (other.ean != null)
+				return false;
+		} else if (!ean.equals(other.ean))
 			return false;
 		if (quantity != other.quantity)
 			return false;

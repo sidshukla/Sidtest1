@@ -1,4 +1,11 @@
 package com.cloudreach.solution.parser;
-public class WSSRFParser {
 
+import java.util.List;
+
+import com.cloudreach.solution.exception.FinsburyApplicationException;
+import com.cloudreach.solution.model.StockItem;
+
+public interface WSSRFParser {
+	
+	public List<StockItem> parseInputFile(String wssrfFilePath) throws FinsburyApplicationException;
 }

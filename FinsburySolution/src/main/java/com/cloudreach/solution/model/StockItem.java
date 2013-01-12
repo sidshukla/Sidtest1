@@ -2,7 +2,7 @@ package com.cloudreach.solution.model;
 
 public class StockItem {
 
-	private long ean;
+	private String ean;
 
 	private String brandName;
 
@@ -20,11 +20,11 @@ public class StockItem {
 
 	private int batchSize;
 
-	public long getEan() {
+	public String getEan() {
 		return ean;
 	}
 
-	public void setEan(long ean) {
+	public void setEan(String ean) {
 		this.ean = ean;
 	}
 
@@ -99,7 +99,7 @@ public class StockItem {
 		result = prime * result + batchSize;
 		result = prime * result
 				+ ((brandName == null) ? 0 : brandName.hashCode());
-		result = prime * result + (int) (ean ^ (ean >>> 32));
+		result = prime * result + ((ean == null) ? 0 : ean.hashCode());
 		result = prime * result
 				+ ((productName == null) ? 0 : productName.hashCode());
 		result = prime * result
@@ -136,7 +136,10 @@ public class StockItem {
 				return false;
 		} else if (!brandName.equals(other.brandName))
 			return false;
-		if (ean != other.ean)
+		if (ean == null) {
+			if (other.ean != null)
+				return false;
+		} else if (!ean.equals(other.ean))
 			return false;
 		if (productName == null) {
 			if (other.productName != null)
