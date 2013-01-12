@@ -2,9 +2,7 @@ package com.cloudreach.solution.parser.impl;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -14,18 +12,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.cloudreach.solution.exception.FinsburyApplicationException;
-import com.cloudreach.solution.metadata.StockItemMetadata;
 import com.cloudreach.solution.model.StockItem;
 import com.cloudreach.solution.parser.WSSRFParser;
 
 public class WSSRFParserImpl implements WSSRFParser {
 	
-	public StockItemMetadata parseInputFile(String wssrfFile) throws FinsburyApplicationException{
-		
-			StockItemMetadata stockItemMetadata = new StockItemMetadata();
-			
+	public List<StockItem> parseInputFile(String wssrfFile) throws FinsburyApplicationException{
+
 			List<StockItem> stockItems = new ArrayList<StockItem>();
-			Map< String , StockItem> stockItemEamMap = new HashMap<String, StockItem>();			
 			try{
 				
 				File file=new File(wssrfFile);
@@ -48,15 +42,11 @@ public class WSSRFParserImpl implements WSSRFParser {
 	                stockItem.setBatchSize(Integer.parseInt(element.getElementsByTagName("batchsize").item(0).getTextContent()));
 	                
 	                stockItems.add(stockItem);
-	                stockItemEamMap.put(ean, stockItem);
 	            }
 			}
 			catch(Exception e){
 				throw new FinsburyApplicationException(e.getMessage());
 			}
-			stockItemMetadata.setStockItems(stockItems);
-			stockItemMetadata.setStockItemEAMMapping(stockItemEamMap);
-			
-			return stockItemMetadata;
+			return stockItems;
 	}
 }

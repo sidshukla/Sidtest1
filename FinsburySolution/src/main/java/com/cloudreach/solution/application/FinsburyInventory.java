@@ -11,6 +11,7 @@ import com.cloudreach.solution.handler.TopBrandBySoldHandler;
 import com.cloudreach.solution.handler.TopProductsBySoldHandler;
 import com.cloudreach.solution.metadata.StockItemMetadata;
 import com.cloudreach.solution.metadata.TransactionMetadata;
+import com.cloudreach.solution.model.StockItem;
 import com.cloudreach.solution.parser.FFTRFParser;
 import com.cloudreach.solution.parser.WSSRFParser;
 import com.cloudreach.solution.parser.impl.FFTRFParserImpl;
@@ -49,7 +50,8 @@ public class FinsburyInventory {
 		
 		boolean exit=false;
 		
-		stockItemMetadata = wssrfParser.parseInputFile(wssrfFile);
+		List<StockItem> stockItems = wssrfParser.parseInputFile(wssrfFile);
+		stockItemMetadata.calculateMetadata(stockItems);
 		fftrfParser.setStockItemMetadata(stockItemMetadata);
 		transactionMetadata = fftrfParser.parseInputFile(fftrfFile);
 		

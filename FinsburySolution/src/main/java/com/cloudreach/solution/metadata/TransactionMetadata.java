@@ -11,6 +11,7 @@ public class TransactionMetadata {
 	private Map<String, Transaction> transactionMap = null;
 	private List<Transaction> sortedTransactionOnSold = null;
 	private List<Brand> sortedBrandQuantitySoldList = null;
+	private Double totalProfit = 0.0;
 
 	public List<Transaction> getSortedTransactionOnSold() {
 		return sortedTransactionOnSold;
@@ -35,6 +36,14 @@ public class TransactionMetadata {
 	public void setSortedBrandQuantitySoldList(
 			List<Brand> sortedBrandQuantitySoldMap) {
 		this.sortedBrandQuantitySoldList = sortedBrandQuantitySoldMap;
+	}
+
+	public Double getTotalProfit() {
+		return totalProfit;
+	}
+
+	public void setTotalProfit(Double totalProfit) {
+		this.totalProfit = totalProfit;
 	}
 
 

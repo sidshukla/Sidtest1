@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.cloudreach.solution.handler.BottomBrandBySoldHandler;
 import com.cloudreach.solution.metadata.StockItemMetadata;
 import com.cloudreach.solution.metadata.TransactionMetadata;
+import com.cloudreach.solution.model.StockItem;
 import com.cloudreach.solution.parser.impl.FFTRFParserImpl;
 import com.cloudreach.solution.parser.impl.WSSRFParserImpl;
 
@@ -23,14 +24,15 @@ public class BottomBrandsBySoldHandlerTest {
 			.getContextClassLoader()
 			.getResource("TransactionfileParsingTest.csv").getPath();
 
-	private static StockItemMetadata stockItemMetadata;
-	private static TransactionMetadata transactionMetadata;
+	private static StockItemMetadata stockItemMetadata = new StockItemMetadata();
+	private static TransactionMetadata transactionMetadata = new TransactionMetadata();
 
 	@BeforeClass
 	public static void setup() throws Exception {
 		WSSRFParserImpl parserImpl = new WSSRFParserImpl();
 		FFTRFParserImpl fftrfParserImpl = new FFTRFParserImpl();
-		stockItemMetadata = parserImpl.parseInputFile(WSSRFFILEPATH);
+		List<StockItem> stockItems = parserImpl.parseInputFile(WSSRFFILEPATH);
+		stockItemMetadata.calculateMetadata(stockItems);
 		fftrfParserImpl.setStockItemMetadata(stockItemMetadata);
 		transactionMetadata = fftrfParserImpl.parseInputFile(FFTRFFILEPATH);
 	}

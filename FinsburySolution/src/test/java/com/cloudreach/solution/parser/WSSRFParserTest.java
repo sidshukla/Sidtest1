@@ -8,7 +8,6 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import com.cloudreach.solution.exception.FinsburyApplicationException;
-import com.cloudreach.solution.metadata.StockItemMetadata;
 import com.cloudreach.solution.model.StockItem;
 import com.cloudreach.solution.parser.impl.WSSRFParserImpl;
 
@@ -44,11 +43,11 @@ public class WSSRFParserTest {
 		t2.setSellingPrice(2.10);
 		t2.setWholesalePrice(1.40);
 
-		StockItemMetadata actualResonse = wssrfParser
+		List<StockItem> stockItems = wssrfParser
 				.parseInputFile(WSSRFFILEPATH);
 
-		Assert.assertEquals(expectedResponse.get(0), actualResonse.getStockItems().get(0));
-		Assert.assertEquals(expectedResponse.get(1), actualResonse.getStockItems().get(1));
+		Assert.assertEquals(expectedResponse.get(0), stockItems.get(0));
+		Assert.assertEquals(expectedResponse.get(1), stockItems.get(1));
 	}
 
 	@Test(expected = FinsburyApplicationException.class)
