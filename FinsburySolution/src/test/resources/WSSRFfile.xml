@@ -1,0 +1,50 @@
+<stocklist>
+  <line ean=”0746817152012”>
+    <brand>V05</brand>
+    <name>hair gel - extra strong</name>
+    <quantity>150ml</quantity>
+    <price type=”standard-sellthrough” currency=”GBP”>6.99</price>
+    <price type=”wholesale” currency=”GBP”>4.30</price>
+    <batchsize>24</batchsize>
+  </line>
+  <line ean=”8014215020045”>
+    <brand>Alisea</brand>
+    <name>Naturale Italian mineral water</name>
+    <quantity>50cl</quantity>
+    <price type=”standard-sellthrough” currency=”GBP”>2.10</price>
+    <price type=”wholesale” currency=”GBP”>1.40</price>
+    <batchsize>20</batchsize>
+  </line>
+  <line ean=”8014215011145”>
+    <brand>Pentene</brand>
+    <name>Hair fall shampoo</name>
+    <quantity>200 ml</quantity>
+    <price type=”standard-sellthrough” currency=”GBP”>3.45</price>
+    <price type=”wholesale” currency=”GBP”>2.10</price>
+    <batchsize>25</batchsize>
+  </line>
+  <line ean=”8099915020045”>
+    <brand>V05</brand>
+    <name>Hair gel - wet look</name>
+    <quantity>50cl</quantity>
+    <price type=”standard-sellthrough” currency=”GBP”>2.50</price>
+    <price type=”wholesale” currency=”GBP”>1.50</price>
+    <batchsize>20</batchsize>
+  </line>
+  <line ean=”8014215020045”>
+    <brand>Pentene</brand>
+    <name>Anti dandruff shampoo</name>
+    <quantity>250cl</quantity>
+    <price type=”standard-sellthrough” currency=”GBP”>4.55</price>
+    <price type=”wholesale” currency=”GBP”>2.75</price>
+    <batchsize>25</batchsize>
+  </line>
+  <line ean=”8014215778845”>
+    <brand>Nivea</brand>
+    <name>Shaving cream</name>
+    <quantity>100ml</quantity>
+    <price type=”standard-sellthrough” currency=”GBP”>1.10</price>
+    <price type=”wholesale” currency=”GBP”>0.30</price>
+    <batchsize>20</batchsize>
+  </line>
+</stocklist>
