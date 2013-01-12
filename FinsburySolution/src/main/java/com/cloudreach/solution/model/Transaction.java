@@ -2,7 +2,7 @@ package com.cloudreach.solution.model;
 
 import java.util.Date;
 
-public class Transaction {
+public class Transaction implements Comparable<Transaction> {
 
 	private Date transactionDate;
 
@@ -83,4 +83,15 @@ public class Transaction {
 		return true;
 	}
 
+	@Override
+	public int compareTo(Transaction arg0) {
+		if(this.quantity > arg0.getQuantity()){
+			return 0;
+		}else if(this.quantity == arg0.quantity){
+			return 0;
+		}else{
+			return 1;
+		}
+		
+	}
 }

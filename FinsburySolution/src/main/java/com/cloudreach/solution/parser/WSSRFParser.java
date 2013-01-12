@@ -1,11 +1,9 @@
 package com.cloudreach.solution.parser;
 
-import java.util.List;
-
 import com.cloudreach.solution.exception.FinsburyApplicationException;
-import com.cloudreach.solution.model.StockItem;
+import com.cloudreach.solution.metadata.StockItemMetadata;
 
 public interface WSSRFParser {
 	
-	public List<StockItem> parseInputFile(String wssrfFilePath) throws FinsburyApplicationException;
+	public StockItemMetadata parseInputFile(String wssrfFile) throws FinsburyApplicationException;
 }

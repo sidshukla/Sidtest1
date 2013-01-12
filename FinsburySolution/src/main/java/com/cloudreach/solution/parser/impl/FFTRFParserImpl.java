@@ -1,9 +1,11 @@
 package com.cloudreach.solution.parser.impl;
 
 import java.io.FileReader;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.DatatypeConverter;
@@ -11,13 +13,16 @@ import javax.xml.bind.DatatypeConverter;
 import au.com.bytecode.opencsv.CSVReader;
 
 import com.cloudreach.solution.exception.FinsburyApplicationException;
+import com.cloudreach.solution.metadata.TransactionMetadata;
 import com.cloudreach.solution.model.Transaction;
 import com.cloudreach.solution.parser.FFTRFParser;
 
 public class FFTRFParserImpl implements FFTRFParser {
 
-	public Map<String, Transaction> parseInputFile(String fftrfFile)
+	public TransactionMetadata parseInputFile(String fftrfFile)
 			throws FinsburyApplicationException {
+		TransactionMetadata transactionMetadata = new TransactionMetadata();
+		
 		CSVReader csvReader = null;
 		Map<String, Transaction> transactionMap = new HashMap<String, Transaction>();
 		try {
@@ -41,16 +46,17 @@ public class FFTRFParserImpl implements FFTRFParser {
 					transactionMap.put(row[2], transaction);
 				}
 			}
-
+			csvReader.close();
 		} catch (Exception e) {
 			throw new FinsburyApplicationException(e.getMessage());
-		} finally {
-			try {
-				csvReader.close();
-			} catch (IOException e) {
-				throw new FinsburyApplicationException(e.getMessage());
-			}
 		}
-		return transactionMap;
+		
+		transactionMetadata.setTransactionMap(transactionMap);
+		
+		List<Transaction> transactions = new ArrayList<Transaction>(transactionMap.values());
+		Collections.sort(transactions);
+		transactionMetadata.setSortedTransactionOnSold(transactions);
+		
+		return transactionMetadata;
 	}
 }
