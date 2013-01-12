@@ -1,13 +1,12 @@
 package com.cloudreach.solution.parser;
 
+import java.util.Map;
+
 import com.cloudreach.solution.exception.FinsburyApplicationException;
-import com.cloudreach.solution.metadata.StockItemMetadata;
-import com.cloudreach.solution.metadata.TransactionMetadata;
+import com.cloudreach.solution.model.Transaction;
 
 
 public interface FFTRFParser {
 
-	TransactionMetadata parseInputFile(String fftrfFile) throws FinsburyApplicationException;
-	
-	void setStockItemMetadata(StockItemMetadata stockItemMetadata);
+	Map<String, Transaction> parseInputFile(String fftrfFile) throws FinsburyApplicationException;
 }

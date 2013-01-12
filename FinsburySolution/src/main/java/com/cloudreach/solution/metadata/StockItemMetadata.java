@@ -11,6 +11,10 @@ public class StockItemMetadata {
 	List<StockItem> stockItems ;
 	Map<String , StockItem> stockItemEAMMapping; 
 	
+	public StockItemMetadata() {
+		this.stockItemEAMMapping = new HashMap<String, StockItem>();
+	}
+	
 	public Map<String, StockItem> getStockItemEAMMapping() {
 		return stockItemEAMMapping;
 	}
@@ -29,7 +33,6 @@ public class StockItemMetadata {
 	
 	public void calculateMetadata(List<StockItem> stockItems){
 		this.stockItems = stockItems;
-		this.stockItemEAMMapping = new HashMap<String, StockItem>();
 		calculateStockItemEAMMapping();
 		
 	}

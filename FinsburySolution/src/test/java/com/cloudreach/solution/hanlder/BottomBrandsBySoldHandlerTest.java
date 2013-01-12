@@ -1,6 +1,7 @@
 package com.cloudreach.solution.hanlder;
 
 import java.util.List;
+import java.util.Map;
 
 import junit.framework.Assert;
 
@@ -11,6 +12,7 @@ import com.cloudreach.solution.handler.BottomBrandBySoldHandler;
 import com.cloudreach.solution.metadata.StockItemMetadata;
 import com.cloudreach.solution.metadata.TransactionMetadata;
 import com.cloudreach.solution.model.StockItem;
+import com.cloudreach.solution.model.Transaction;
 import com.cloudreach.solution.parser.impl.FFTRFParserImpl;
 import com.cloudreach.solution.parser.impl.WSSRFParserImpl;
 
@@ -33,8 +35,9 @@ public class BottomBrandsBySoldHandlerTest {
 		FFTRFParserImpl fftrfParserImpl = new FFTRFParserImpl();
 		List<StockItem> stockItems = parserImpl.parseInputFile(WSSRFFILEPATH);
 		stockItemMetadata.calculateMetadata(stockItems);
-		fftrfParserImpl.setStockItemMetadata(stockItemMetadata);
-		transactionMetadata = fftrfParserImpl.parseInputFile(FFTRFFILEPATH);
+		Map<String, Transaction> transactions = fftrfParserImpl.parseInputFile(FFTRFFILEPATH);
+		stockItemMetadata.calculateMetadata(stockItems);
+		transactionMetadata.calculateMetadata(transactions , stockItemMetadata.getStockItemEAMMapping());
 	}
 
 	@Test

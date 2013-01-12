@@ -1,6 +1,7 @@
 package com.cloudreach.solution.application;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import com.cloudreach.solution.exception.FinsburyApplicationException;
@@ -12,6 +13,7 @@ import com.cloudreach.solution.handler.TopProductsBySoldHandler;
 import com.cloudreach.solution.metadata.StockItemMetadata;
 import com.cloudreach.solution.metadata.TransactionMetadata;
 import com.cloudreach.solution.model.StockItem;
+import com.cloudreach.solution.model.Transaction;
 import com.cloudreach.solution.parser.FFTRFParser;
 import com.cloudreach.solution.parser.WSSRFParser;
 import com.cloudreach.solution.parser.impl.FFTRFParserImpl;
@@ -51,9 +53,9 @@ public class FinsburyInventory {
 		boolean exit=false;
 		
 		List<StockItem> stockItems = wssrfParser.parseInputFile(wssrfFile);
+		Map<String, Transaction> transactions =  fftrfParser.parseInputFile(fftrfFile);
 		stockItemMetadata.calculateMetadata(stockItems);
-		fftrfParser.setStockItemMetadata(stockItemMetadata);
-		transactionMetadata = fftrfParser.parseInputFile(fftrfFile);
+		transactionMetadata.calculateMetadata(transactions , stockItemMetadata.getStockItemEAMMapping());
 		
 		int noOfTransaction = transactionMetadata.getTransactionMap().size();
 		
