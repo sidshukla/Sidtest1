@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.cloudreach.solution.exception.FinsburyApplicationException;
 import com.cloudreach.solution.handler.BottomProductsBySoldHandler;
 import com.cloudreach.solution.handler.RequestHandler;
+import com.cloudreach.solution.handler.TopBrandBySoldHandler;
 import com.cloudreach.solution.handler.TopProductsBySoldHandler;
 import com.cloudreach.solution.metadata.StockItemMetadata;
 import com.cloudreach.solution.metadata.TransactionMetadata;
@@ -22,12 +23,10 @@ public class FinsburyInventory {
 	
 	private RequestHandler topProductBySoldHandler;
 	private RequestHandler bottomProductBySoldHandler;
+	private RequestHandler topBrandBySoldHandler;
 	
 	private StockItemMetadata stockItemMetadata;
 	private TransactionMetadata transactionMetadata;
-	
-	private static int stockSize = 0;
-	private static int noOfTransaction = 1;
 	
 	public FinsburyInventory() {
 		wssrfParser = new WSSRFParserImpl();
@@ -40,6 +39,7 @@ public class FinsburyInventory {
 		
 		topProductBySoldHandler = new TopProductsBySoldHandler();
 		bottomProductBySoldHandler = new BottomProductsBySoldHandler();
+		topBrandBySoldHandler = new TopBrandBySoldHandler();
 	}
 	
 	public void start(String wssrfFile , String fftrfFile) throws FinsburyApplicationException{
@@ -47,10 +47,10 @@ public class FinsburyInventory {
 		boolean exit=false;
 		
 		stockItemMetadata = wssrfParser.parseInputFile(wssrfFile);
+		fftrfParser.setStockItemMetadata(stockItemMetadata);
 		transactionMetadata = fftrfParser.parseInputFile(fftrfFile);
 		
-		stockSize = stockItemMetadata.getStockItems().size();
-		noOfTransaction = transactionMetadata.getTransactionMap().size();
+		int noOfTransaction = transactionMetadata.getTransactionMap().size();
 		
 		
 		while(!exit){
@@ -67,23 +67,28 @@ public class FinsburyInventory {
 			switch(choice){
 			case 1:
 				
-				int requestSize = askInput();
+				int requestSize = askInput(noOfTransaction);
 				List<String> result1 = topProductBySoldHandler.processRequest(stockItemMetadata , transactionMetadata , requestSize);
 				System.out.println("-------------------------------");
-				System.out.println("Top product by number sold are :");
-				System.out.println("-------------------------------");
+				System.out.println("Top " + requestSize +" product by number sold are :");
 				this.outputResult(result1);
 				break;
 				
 			case 2:
-				int requestSize2 = askInput();
+				int requestSize2 = askInput(noOfTransaction);
 				List<String> result2 = bottomProductBySoldHandler.processRequest(stockItemMetadata , transactionMetadata , requestSize2);
-				System.out.println("Bottom product by number sold are :");
+				System.out.println("-------------------------------");
+				System.out.println("Bottom " + requestSize2 +" product by number sold are :");
 				this.outputResult(result2);
 				break;
 				
 			case 3:
-				System.out.println("Not yet implemented");
+				int requestSize3 = askInput(transactionMetadata.getSortedBrandQuantitySoldList().size());
+				List<String> result3 = topBrandBySoldHandler.processRequest(stockItemMetadata , transactionMetadata , requestSize3);
+				System.out.println("-------------------------------");
+				System.out.println("Top " + requestSize3 +" brands by number sold are :");
+				this.outputResult(result3);
+				break;
 			case 4:
 				System.out.println("Not yet implemented");
 			case 5:
@@ -100,15 +105,16 @@ public class FinsburyInventory {
 	}
 
 	private void outputResult(List<String> result) {
+		System.out.println("-------------------------------");
 		for(String item : result){
 			System.out.println(item);
 		}
 	}
 	
-	private int askInput(){
-		System.out.println("Input value of n between 1 and " + noOfTransaction + " :");
+	private int askInput(int maxValue){
+		System.out.println("Input value of n between 1 and " + maxValue + " :");
 		int requestSize=scanner.nextInt();
-		while(!((requestSize>0)&&(requestSize<=noOfTransaction))){
+		while(!((requestSize>0)&&(requestSize<=maxValue))){
 			System.out.println("Invalid input , please try again !!");
 			requestSize=scanner.nextInt();
 		}

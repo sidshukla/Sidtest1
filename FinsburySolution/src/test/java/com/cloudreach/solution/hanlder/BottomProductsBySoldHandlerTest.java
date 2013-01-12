@@ -29,6 +29,7 @@ public class BottomProductsBySoldHandlerTest {
 		WSSRFParserImpl parserImpl = new WSSRFParserImpl();
 		FFTRFParserImpl fftrfParserImpl = new FFTRFParserImpl();
 		stockItemMetadata = parserImpl.parseInputFile(WSSRFFILEPATH);
+		fftrfParserImpl.setStockItemMetadata(stockItemMetadata);
 		transactionMetadata = fftrfParserImpl.parseInputFile(FFTRFFILEPATH);
 	}
 	

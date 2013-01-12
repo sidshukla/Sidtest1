@@ -11,17 +11,16 @@ public class BottomProductsBySoldHandler implements RequestHandler {
 	@Override
 	public List<String> processRequest(StockItemMetadata stockItemMetadata,
 			TransactionMetadata transactionMetadata, int requestSize) {
-		
+
 		List<String> bottomProducts = new ArrayList<String>();
-		
-		for(int i= transactionMetadata.getSortedTransactionOnSold().size()  ; i > transactionMetadata.getSortedTransactionOnSold().size() - requestSize ; i--){
-			String barcode = transactionMetadata.getSortedTransactionOnSold().get(i-1).getEan();
-			String productName = stockItemMetadata.getStockItemEAMMapping().get(barcode).getProductName();
-			bottomProducts.add(productName);
+
+		for (int i = transactionMetadata.getSortedTransactionOnSold().size(); i > transactionMetadata
+				.getSortedTransactionOnSold().size() - requestSize; i--) {
+			bottomProducts.add(transactionMetadata.getSortedTransactionOnSold()
+					.get(i - 1).getProductName());
 		}
-		
+
 		return bottomProducts;
 	}
-
 
 }

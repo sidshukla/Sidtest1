@@ -3,12 +3,14 @@ package com.cloudreach.solution.metadata;
 import java.util.List;
 import java.util.Map;
 
+import com.cloudreach.solution.model.Brand;
 import com.cloudreach.solution.model.Transaction;
 
 public class TransactionMetadata {
 	
-	Map<String, Transaction> transactionMap = null;
-	List<Transaction> sortedTransactionOnSold = null;
+	private Map<String, Transaction> transactionMap = null;
+	private List<Transaction> sortedTransactionOnSold = null;
+	private List<Brand> sortedBrandQuantitySoldList = null;
 
 	public List<Transaction> getSortedTransactionOnSold() {
 		return sortedTransactionOnSold;
@@ -26,9 +28,14 @@ public class TransactionMetadata {
 		this.transactionMap = transactionMap;
 	}
 
-	public void calculateMetadata(){
-		
-		
-		
+	public List<Brand> getSortedBrandQuantitySoldList() {
+		return sortedBrandQuantitySoldList;
 	}
+
+	public void setSortedBrandQuantitySoldList(
+			List<Brand> sortedBrandQuantitySoldMap) {
+		this.sortedBrandQuantitySoldList = sortedBrandQuantitySoldMap;
+	}
+
+
 }
