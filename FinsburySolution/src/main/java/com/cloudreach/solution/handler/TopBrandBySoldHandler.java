@@ -12,12 +12,12 @@ public class TopBrandBySoldHandler implements RequestHandler {
 	public List<String> processRequest(StockItemMetadata stockItemMetadata,
 			TransactionMetadata transactionMetadata, int requestSize) {
 		
-		List<String> topProducts = new ArrayList<String>();
+		List<String> bottomBrands = new ArrayList<String>();
 		for (int i = 0; i < requestSize; i++) {
-			topProducts.add(transactionMetadata.getSortedBrandQuantitySoldList().get(i).getBrand());
+			bottomBrands.add(transactionMetadata.getSortedBrandQuantitySoldList().get(i).getBrand());
 		}
 
-		return topProducts;
+		return bottomBrands;
 	}
 
 }

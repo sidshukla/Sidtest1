@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.cloudreach.solution.exception.FinsburyApplicationException;
+import com.cloudreach.solution.handler.BottomBrandBySoldHandler;
 import com.cloudreach.solution.handler.BottomProductsBySoldHandler;
 import com.cloudreach.solution.handler.RequestHandler;
 import com.cloudreach.solution.handler.TopBrandBySoldHandler;
@@ -24,6 +25,7 @@ public class FinsburyInventory {
 	private RequestHandler topProductBySoldHandler;
 	private RequestHandler bottomProductBySoldHandler;
 	private RequestHandler topBrandBySoldHandler;
+	private RequestHandler bottomBrandsBySoldHandler;
 	
 	private StockItemMetadata stockItemMetadata;
 	private TransactionMetadata transactionMetadata;
@@ -40,6 +42,7 @@ public class FinsburyInventory {
 		topProductBySoldHandler = new TopProductsBySoldHandler();
 		bottomProductBySoldHandler = new BottomProductsBySoldHandler();
 		topBrandBySoldHandler = new TopBrandBySoldHandler();
+		bottomBrandsBySoldHandler = new BottomBrandBySoldHandler();
 	}
 	
 	public void start(String wssrfFile , String fftrfFile) throws FinsburyApplicationException{
@@ -90,7 +93,12 @@ public class FinsburyInventory {
 				this.outputResult(result3);
 				break;
 			case 4:
-				System.out.println("Not yet implemented");
+				int requestSize4 = askInput(transactionMetadata.getSortedBrandQuantitySoldList().size());
+				List<String> result4 = bottomBrandsBySoldHandler.processRequest(stockItemMetadata , transactionMetadata , requestSize4);
+				System.out.println("-------------------------------");
+				System.out.println("Bottom " + requestSize4 +" brands by number sold are :");
+				this.outputResult(result4);
+				break;
 			case 5:
 				System.out.println("Not yet implemented");
 			case 6:
