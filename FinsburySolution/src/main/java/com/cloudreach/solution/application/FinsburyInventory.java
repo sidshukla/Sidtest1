@@ -7,6 +7,7 @@ import java.util.Scanner;
 import com.cloudreach.solution.exception.FinsburyApplicationException;
 import com.cloudreach.solution.handler.BottomBrandBySoldHandler;
 import com.cloudreach.solution.handler.BottomProductsBySoldHandler;
+import com.cloudreach.solution.handler.SameTimeBuyProbabilityHandler;
 import com.cloudreach.solution.handler.TotalProfitHandler;
 import com.cloudreach.solution.handler.RequestHandler;
 import com.cloudreach.solution.handler.TopBrandBySoldHandler;
@@ -31,6 +32,7 @@ public class FinsburyInventory {
 	private RequestHandler topBrandBySoldHandler;
 	private RequestHandler bottomBrandsBySoldHandler;
 	private TotalProfitHandler profitHandler;
+	private SameTimeBuyProbabilityHandler sameTimeBuyProbabilityHandler;
 	
 	private StockItemMetadata stockItemMetadata;
 	private TransactionMetadata transactionMetadata;
@@ -49,6 +51,7 @@ public class FinsburyInventory {
 		topBrandBySoldHandler = new TopBrandBySoldHandler();
 		bottomBrandsBySoldHandler = new BottomBrandBySoldHandler();
 		profitHandler = new TotalProfitHandler();
+		sameTimeBuyProbabilityHandler = new SameTimeBuyProbabilityHandler();
 	}
 	
 	public void start(String wssrfFile , String fftrfFile) throws FinsburyApplicationException{
@@ -71,7 +74,8 @@ public class FinsburyInventory {
 			System.out.println("3: Get top n brands by numbers sold");
 			System.out.println("4: Get bottom n brands by numbers sold");
 			System.out.println("5: Get total profit");
-			System.out.println("6: Exit");
+			System.out.println("6: Get probability that a customer will buy two products at the same time");
+			System.out.println("7: Exit");
 			
 			int choice=scanner.nextInt();
 			switch(choice){
@@ -112,7 +116,10 @@ public class FinsburyInventory {
 				System.out.println("Total Profit from the sale is " + totalProfit );
 				break;
 			case 6:
-				System.out.println("Not yet implemented");
+				int probability = sameTimeBuyProbabilityHandler.processRequest(transactionMetadata);
+				System.out.println("-------------------------------");
+				System.out.println("The probability that a customer will buy two products at the same time is " + probability );
+				break;
 			case 7:
 				exit=true;
 				continue;
