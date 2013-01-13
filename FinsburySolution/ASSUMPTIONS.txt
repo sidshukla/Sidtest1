@@ -1,0 +1,11 @@
+Following are the assumptions made while developing the applications:
+
+1. The input CSV file and XML file are valid as per the required format. No validation is performed on the same.
+
+2. The information in the CSV file is valid i.e. the product information matches the XML file data.
+
+3. For the number of batches ordered , we have assumed that  if you sold n of a certain product where n is a multiple of the batchsize,
+   then you have ordered exact multiple and not more
+   
+4. For calculating the probability at the same time , we have assumed that all the transactions with the same transaction id is ordered by
+   same customer at the same time. 
