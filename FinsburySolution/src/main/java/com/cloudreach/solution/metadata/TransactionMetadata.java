@@ -7,24 +7,28 @@ import java.util.List;
 import java.util.Map;
 
 import com.cloudreach.solution.model.Brand;
+import com.cloudreach.solution.model.Product;
 import com.cloudreach.solution.model.StockItem;
 import com.cloudreach.solution.model.Transaction;
 
 public class TransactionMetadata {
 	
-	private Map<String, Transaction> transactionMap = null;
-	private List<Transaction> sortedTransactionOnSold = null;
-	private List<Brand> sortedBrandQuantitySoldList = null;
+	private Map<String, Transaction> transactionMap;
+	private List<Transaction> sortedTransactionOnSold;
+	private List<Brand> sortedBrandQuantitySoldList;
+	private List<Product> sortedProfitProducts;
 	
 	public TransactionMetadata() {
 		sortedTransactionOnSold = new ArrayList<Transaction>();
 		sortedBrandQuantitySoldList = new ArrayList<Brand>();
+		setSortedProfitProducts(new ArrayList<Product>());
 	}
 
 	public void calculateMetadata(Map<String, Transaction> transactionMap , Map<String, StockItem> stockItemMap) {
 		this.setTransactionMap(transactionMap);
 
 		Map<String , Brand> brandQuantitySoldTempMap = new HashMap<String, Brand>();
+		Map<String , Product> productTempMap = new HashMap<String, Product>();
 		
 		for(String eam : transactionMap.keySet()){
 			String brandName = stockItemMap.get(eam).getBrandName();
@@ -42,9 +46,28 @@ public class TransactionMetadata {
 				brand.setQuantity(transaction.getQuantity());
 				brandQuantitySoldTempMap.put(brandName, brand);
 			}
+			
+			if(productTempMap.containsKey(eam)){
+				Product localProduct = productTempMap.get(eam);
+				Double profit = transaction.getQuantity() * (stockItemMap.get(eam).getSellingPrice() - stockItemMap.get(eam).getWholesalePrice());
+				localProduct.setProfit(localProduct.getProfit() + profit);
+			}else{
+				Product product = new Product();
+				product.setEam(eam);
+				product.setProductName(stockItemMap.get(eam).getProductName());
+				product.setProfit(transaction.getQuantity() * (stockItemMap.get(eam).getSellingPrice() - stockItemMap.get(eam).getWholesalePrice()));
+				productTempMap.put(eam, product);
+			}
 		}
 		calculateSortedTransactionList(transactionMap);
 		calculateSortedBrandsList(brandQuantitySoldTempMap);
+		calculateSortedProfitProductList(productTempMap);
+	}
+
+	private void calculateSortedProfitProductList(Map<String, Product> productTempMap) {
+		List<Product> sortedProfitProducts = new ArrayList<Product>(productTempMap.values());
+		Collections.sort(sortedProfitProducts);
+		this.setSortedProfitProducts(sortedProfitProducts);
 	}
 
 	private void calculateSortedTransactionList(Map<String, Transaction> transactionsMap) {
@@ -82,5 +105,13 @@ public class TransactionMetadata {
 	public void setSortedBrandQuantitySoldList(
 			List<Brand> sortedBrandQuantitySoldMap) {
 		this.sortedBrandQuantitySoldList = sortedBrandQuantitySoldMap;
+	}
+
+	public List<Product> getSortedProfitProducts() {
+		return sortedProfitProducts;
+	}
+
+	public void setSortedProfitProducts(List<Product> sortedProfitProducts) {
+		this.sortedProfitProducts = sortedProfitProducts;
 	}
 }

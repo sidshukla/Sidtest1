@@ -26,7 +26,7 @@ public class Brand implements Comparable<Brand>{
 	public int compareTo(Brand brand) {
 		if(this.quantity > brand.getQuantity()){
 			return -1;
-		}else if(this.quantity == brand.quantity){
+		}else if(this.quantity == brand.getQuantity()){
 			return 0;
 		}else{
 			return 1;

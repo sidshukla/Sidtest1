@@ -8,6 +8,7 @@ import com.cloudreach.solution.exception.FinsburyApplicationException;
 import com.cloudreach.solution.handler.BottomBrandBySoldHandler;
 import com.cloudreach.solution.handler.BottomProductsBySoldHandler;
 import com.cloudreach.solution.handler.SameTimeBuyProbabilityHandler;
+import com.cloudreach.solution.handler.TopProductsByProfitHandler;
 import com.cloudreach.solution.handler.TotalProfitHandler;
 import com.cloudreach.solution.handler.RequestHandler;
 import com.cloudreach.solution.handler.TopBrandBySoldHandler;
@@ -35,6 +36,7 @@ public class FinsburyInventory {
 	private TotalProfitHandler profitHandler;
 	private SameTimeBuyProbabilityHandler sameTimeBuyProbabilityHandler;
 	private TotalSpendHandler totalSpendHandler;
+	private RequestHandler topProductsByProfitHandler;
 	
 	private StockItemMetadata stockItemMetadata;
 	private TransactionMetadata transactionMetadata;
@@ -55,6 +57,7 @@ public class FinsburyInventory {
 		profitHandler = new TotalProfitHandler();
 		sameTimeBuyProbabilityHandler = new SameTimeBuyProbabilityHandler();
 		totalSpendHandler = new TotalSpendHandler();
+		topProductsByProfitHandler = new TopProductsByProfitHandler();
 	}
 	
 	public void start(String wssrfFile , String fftrfFile) throws FinsburyApplicationException{
@@ -79,7 +82,8 @@ public class FinsburyInventory {
 			System.out.println("5: Get total profit");
 			System.out.println("6: Get probability that a customer will buy two products at the same time");
 			System.out.println("7: Get total spend on WestBun produce");
-			System.out.println("8: Exit");
+			System.out.println("8: Get top n products by profit");
+			System.out.println("9: Exit");
 			
 			int choice=scanner.nextInt();
 			switch(choice){
@@ -130,6 +134,13 @@ public class FinsburyInventory {
 				System.out.println("Total spend on WestBun produce " + totalSpend );
 				break;
 			case 8:
+				int requestSize5 = askInput(noOfTransaction);
+				List<String> result5 = topProductsByProfitHandler.processRequest(stockItemMetadata , transactionMetadata , requestSize5);
+				System.out.println("-------------------------------");
+				System.out.println("Top " + requestSize5 +" product by profit are :");
+				this.outputResult(result5);
+				break;
+			case 9:
 				exit=true;
 				continue;
 			default:
