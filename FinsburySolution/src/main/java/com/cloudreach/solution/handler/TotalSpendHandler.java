@@ -4,8 +4,9 @@ import com.cloudreach.solution.metadata.StockItemMetadata;
 import com.cloudreach.solution.metadata.TransactionMetadata;
 
 /*
- *  Assuming if you sold n of a certain product where n is a multiple of the batchsize,
- *  we are assuming that you had that exact multiple and not more
+ * Handler class for getting the Total spend
+ * 
+ * returns a list of size : requestSize
  */
 public class TotalSpendHandler {
 

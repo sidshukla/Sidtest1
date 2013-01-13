@@ -12,6 +12,9 @@ import com.cloudreach.solution.exception.FinsburyApplicationException;
 import com.cloudreach.solution.model.Transaction;
 import com.cloudreach.solution.parser.FFTRFParser;
 
+/*
+ * Parser implemenation for the CSV file
+ */
 public class FFTRFParserImpl implements FFTRFParser {
 
 	public Map<String, Transaction> parseInputFile(String fftrfFile)

@@ -5,10 +5,21 @@ import java.util.List;
 import java.util.Map;
 
 import com.cloudreach.solution.model.StockItem;
-
+/*
+ * Metadata from the WSSRF file converted into the stock item model
+ * 
+ * @Author : Siddharth
+ */
 public class StockItemMetadata {
 	
+	/*
+	 * List of all the stock items 
+	 */
 	List<StockItem> stockItems ;
+	
+	/*
+	 * Map of all stock items with the EAM number as key 
+	 */
 	Map<String , StockItem> stockItemEAMMapping; 
 	
 	public StockItemMetadata() {
@@ -30,7 +41,11 @@ public class StockItemMetadata {
 	public List<StockItem> getStockItems(){
 		return this.stockItems;
 	}
-	
+
+
+	/*
+	 * Calculate the metadata information
+	 */
 	public void calculateMetadata(List<StockItem> stockItems){
 		this.stockItems = stockItems;
 		calculateStockItemEAMMapping();

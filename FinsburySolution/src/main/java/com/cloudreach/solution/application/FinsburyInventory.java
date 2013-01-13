@@ -23,6 +23,13 @@ import com.cloudreach.solution.parser.WSSRFParser;
 import com.cloudreach.solution.parser.impl.FFTRFParserImpl;
 import com.cloudreach.solution.parser.impl.WSSRFParserImpl;
 
+/*
+ * Main class taking the files as input and prompting a command 
+ * line selection for the user
+ * 
+ * @author siddharth
+ * 
+ */
 public class FinsburyInventory {
 	
 	private WSSRFParser wssrfParser;
@@ -33,10 +40,10 @@ public class FinsburyInventory {
 	private RequestHandler bottomProductBySoldHandler;
 	private RequestHandler topBrandBySoldHandler;
 	private RequestHandler bottomBrandsBySoldHandler;
+	private RequestHandler topProductsByProfitHandler;
 	private TotalProfitHandler profitHandler;
 	private SameTimeBuyProbabilityHandler sameTimeBuyProbabilityHandler;
 	private TotalSpendHandler totalSpendHandler;
-	private RequestHandler topProductsByProfitHandler;
 	
 	private StockItemMetadata stockItemMetadata;
 	private TransactionMetadata transactionMetadata;
@@ -60,12 +67,27 @@ public class FinsburyInventory {
 		topProductsByProfitHandler = new TopProductsByProfitHandler();
 	}
 	
+	
+	/**
+	 * Start method takes as input the paths to the WestBun XML file and the Finsbury Foods csv file
+	 * It prompts a command line selection menu for the desired output
+	 * @param wssrfFile path
+	 * @param fftrfFile path
+	 * @throws FinsburyApplicationException
+	 */
 	public void start(String wssrfFile , String fftrfFile) throws FinsburyApplicationException{
 		
 		boolean exit=false;
 		
+		/*
+		 * Parse the input files and return a list of POJO objects
+		 */
 		List<StockItem> stockItems = wssrfParser.parseInputFile(wssrfFile);
 		Map<String, Transaction> transactions =  fftrfParser.parseInputFile(fftrfFile);
+		
+		/*
+		 * Perform data aggregation and selection based on the parsed information from the file
+		 */
 		stockItemMetadata.calculateMetadata(stockItems);
 		transactionMetadata.calculateMetadata(transactions , stockItemMetadata.getStockItemEAMMapping());
 		
@@ -86,6 +108,9 @@ public class FinsburyInventory {
 			System.out.println("9: Exit");
 			
 			int choice=scanner.nextInt();
+			/*
+			 * Delegate the control to appropriate handler class as per the selection to get the desired results
+			 */
 			switch(choice){
 			case 1:
 				
@@ -144,7 +169,7 @@ public class FinsburyInventory {
 				exit=true;
 				continue;
 			default:
-				System.out.println("Invalid input");
+				System.out.println("Invalid input. Please try again!!");
 			}		
 		}
 	}

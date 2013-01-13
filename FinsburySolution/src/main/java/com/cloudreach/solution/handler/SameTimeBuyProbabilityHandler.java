@@ -9,6 +9,9 @@ import com.cloudreach.solution.metadata.TransactionMetadata;
 import com.cloudreach.solution.model.Transaction;
 
 /*
+ * Handler class for getting the bottom brands by number sold
+ * returns a list of size : requestSize
+ * 
  * Assuming if a customer buys two products at the same time , the transaction id will be the same
  */
 public class SameTimeBuyProbabilityHandler {

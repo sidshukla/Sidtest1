@@ -15,6 +15,9 @@ import com.cloudreach.solution.exception.FinsburyApplicationException;
 import com.cloudreach.solution.model.StockItem;
 import com.cloudreach.solution.parser.WSSRFParser;
 
+/*
+ * Parser implementation for the XML file
+ */
 public class WSSRFParserImpl implements WSSRFParser {
 	
 	public List<StockItem> parseInputFile(String wssrfFile) throws FinsburyApplicationException{

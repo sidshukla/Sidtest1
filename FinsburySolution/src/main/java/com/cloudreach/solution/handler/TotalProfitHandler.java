@@ -4,8 +4,9 @@ import com.cloudreach.solution.metadata.StockItemMetadata;
 import com.cloudreach.solution.metadata.TransactionMetadata;
 
 /*
- *  Assuming if you sold n number of a certain product and its a multiple of the batch size,
- *  we are assuming that you had ordered exact multiple of batches
+ * Handler class for getting the total profit
+ * 
+ * returns a list of size : requestSize
  */
 public class TotalProfitHandler{
 

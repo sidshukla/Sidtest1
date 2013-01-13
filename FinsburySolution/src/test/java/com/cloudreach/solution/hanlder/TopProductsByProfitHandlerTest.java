@@ -45,8 +45,8 @@ public class TopProductsByProfitHandlerTest {
 
 		List<String> topProducts = topProductsByProfitHandler.processRequest(stockItemMetadata, transactionMetadata, 2);
 
-		Assert.assertEquals("hair gel - extra strong", topProducts.get(0));
-		Assert.assertEquals("Anti dandruff shampoo",
+		Assert.assertEquals("Shaving cream", topProducts.get(0));
+		Assert.assertEquals("Normal shampoo",
 				topProducts.get(1));
 	}
 }

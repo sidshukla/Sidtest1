@@ -12,16 +12,41 @@ import com.cloudreach.solution.model.StockItem;
 import com.cloudreach.solution.model.Transaction;
 
 /*
- *  Assuming if you sold n of a certain product where n is a multiple of the batchsize,
- *  we are assuming that you had that exact multiple and not more
+ * Metadata from the WSSRF file and FFTRFP file
+ * converted into the model classes and maps
+ * 
+ * @Author : Siddharth
  */
 public class TransactionMetadata {
 	
+	/*
+	 * Map containing all the transactions with the EAM number as key
+	 */
 	private Map<String, Transaction> transactionMap;
+	
+	/*
+	 * List of all the transactions sorted on the quantity sold
+	 */
 	private List<Transaction> sortedTransactionOnSold;
+	
+	/*
+	 * List of all the brans sorted on the quantity sold
+	 */
 	private List<Brand> sortedBrandQuantitySoldList;
+	
+	/*
+	 * List of all the products sorted on Profit
+	 */
 	private List<Product> sortedProfitProducts;
+	
+	/*
+	 * Total spend value
+	 */
 	private Double totalSpend;
+	
+	/*
+	 * Total earned value
+	 */
 	private Double totalEarned;
 	
 	public TransactionMetadata() {
@@ -45,6 +70,9 @@ public class TransactionMetadata {
 			transaction.setBrandName(brandName);
 			transaction.setProductName(stockItemMap.get(eam).getProductName());
 			
+			/*
+			 * Consolidating all the brands and the quantity sold
+			 */
 			if(brandQuantitySoldTempMap.containsKey(brandName)){
 				Brand localBrandName = brandQuantitySoldTempMap.get(brandName);
 				localBrandName.setQuantity(localBrandName.getQuantity() + transaction.getQuantity());
@@ -55,7 +83,9 @@ public class TransactionMetadata {
 				brandQuantitySoldTempMap.put(brandName, brand);
 			}
 			
-			
+			/*
+			 * Calculating profit on each product
+			 */
 			Double totalEarnedByProduct = transaction.getQuantity() * stockItemMap.get(eam).getSellingPrice();
 			int batchSize = calculateBatchSize(transactionMap, stockItemMap, eam);
 			Double totalSpendForProduct = batchSize*stockItemMap.get(eam).getBatchSize()
@@ -93,6 +123,10 @@ public class TransactionMetadata {
 		this.sortedBrandQuantitySoldList = sortedBrands;
 	}
 	
+	/*
+	 *  Assuming if you sold n of a certain product where n is a multiple of the batchsize,
+	 *  we are assuming that you had that exact multiple and not more
+	 */
 	private int calculateBatchSize(Map<String, Transaction> transactionMap , Map<String, StockItem> stockItemMap , String eam){
 		int numberOfBatches = 0;
 		int quantitySold = 0;

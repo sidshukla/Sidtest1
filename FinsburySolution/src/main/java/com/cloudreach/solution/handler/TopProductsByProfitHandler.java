@@ -6,6 +6,11 @@ import java.util.List;
 import com.cloudreach.solution.metadata.StockItemMetadata;
 import com.cloudreach.solution.metadata.TransactionMetadata;
 
+/*
+ * Handler class for getting the Top products by profit
+ * 
+ * returns a list of size : requestSize
+ */
 public class TopProductsByProfitHandler implements RequestHandler{
 
 	@Override
