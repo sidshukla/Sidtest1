@@ -20,8 +20,13 @@ public class TotalProfitHandlerTest {
 	
 	TotalProfitHandler totalProfitHandler = new TotalProfitHandler();
 	
-	private static final String WSSRFFILEPATH = Thread.currentThread().getContextClassLoader().getResource("WSSRFfileParsingTest.xml").getPath();
-	private static final String FFTRFFILEPATH = Thread.currentThread().getContextClassLoader().getResource("TransactionfileParsingTest.csv").getPath();
+	private static final String WSSRFFILEPATH = Thread.currentThread()
+			.getContextClassLoader().getResource("WSSRFTestFile.xml")
+			.getPath();
+	private static final String FFTRFFILEPATH = Thread.currentThread()
+			.getContextClassLoader()
+			.getResource("TransactionTestFile.csv").getPath();
+
 	
 	private static StockItemMetadata stockItemMetadata = new StockItemMetadata();
 	private static TransactionMetadata transactionMetadata = new TransactionMetadata();
@@ -43,7 +48,8 @@ public class TotalProfitHandlerTest {
 		
 		Double totalProfit = totalProfitHandler.processRequest(transactionMetadata, stockItemMetadata);
 		
-		Assert.assertEquals(5,Math.round(totalProfit));
+		Assert.assertEquals(24.050000000000004,totalProfit);
+		
 	}
 
 }

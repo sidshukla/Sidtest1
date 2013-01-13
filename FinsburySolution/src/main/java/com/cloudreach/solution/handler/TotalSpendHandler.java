@@ -13,29 +13,38 @@ import com.cloudreach.solution.model.Transaction;
  */
 public class TotalSpendHandler {
 
-	public Double processRequest(TransactionMetadata transactionMetadata , StockItemMetadata stockItemMetadata) {
+	public Double processRequest(TransactionMetadata transactionMetadata,
+			StockItemMetadata stockItemMetadata) {
 		Double totalSpend = 0.0;
-		
-		Map<String , Transaction> transasctionMap = transactionMetadata.getTransactionMap();
-		Map<String , StockItem> stockItemMap = stockItemMetadata.getStockItemEAMMapping();
-		
-		for(String eam :  stockItemMetadata.getStockItemEAMMapping().keySet()){
+
+		Map<String, Transaction> transasctionMap = transactionMetadata
+				.getTransactionMap();
+		Map<String, StockItem> stockItemMap = stockItemMetadata
+				.getStockItemEAMMapping();
+
+		for (String eam : stockItemMetadata.getStockItemEAMMapping().keySet()) {
 			int numberOfBatches = 0;
 			int quantitySold = 0;
-			if(transasctionMap.get(eam) == null){
-				quantitySold =  stockItemMap.get(eam).getBatchSize() + 1;
+			/*
+			 * If the item is not sold at all , we assume you have ordered only 1 batch
+			 */
+			if (transasctionMap.get(eam) == null) {
+				numberOfBatches = 1;
 			}else{
 				quantitySold = transasctionMap.get(eam).getQuantity();
 			}
-			
-			
-			if(quantitySold % stockItemMap.get(eam).getBatchSize()==0){
-				numberOfBatches= quantitySold/stockItemMap.get(eam).getBatchSize(); 
-			}else{
-				Integer divider= quantitySold/stockItemMap.get(eam).getBatchSize();
-				numberOfBatches=divider+1;
+			if (numberOfBatches == 0) {
+				if (quantitySold % stockItemMap.get(eam).getBatchSize() == 0) {
+					numberOfBatches = quantitySold
+							/ stockItemMap.get(eam).getBatchSize();
+				} else {
+					Integer divider = quantitySold
+							/ stockItemMap.get(eam).getBatchSize();
+					numberOfBatches = divider + 1;
+				}
 			}
-			totalSpend = totalSpend + (numberOfBatches*stockItemMap.get(eam).getBatchSize() * stockItemMap.get(eam).getWholesalePrice());
+			totalSpend = totalSpend+ (numberOfBatches * stockItemMap.get(eam).getBatchSize() * stockItemMap
+							.get(eam).getWholesalePrice());
 		}
 		return totalSpend;
 	}

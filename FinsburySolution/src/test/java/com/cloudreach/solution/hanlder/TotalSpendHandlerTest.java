@@ -20,8 +20,13 @@ public class TotalSpendHandlerTest {
 	
 	TotalSpendHandler totalSpendHandler = new TotalSpendHandler();
 	
-	private static final String WSSRFFILEPATH = Thread.currentThread().getContextClassLoader().getResource("WSSRFfileParsingTest.xml").getPath();
-	private static final String FFTRFFILEPATH = Thread.currentThread().getContextClassLoader().getResource("TransactionfileParsingTest.csv").getPath();
+	private static final String WSSRFFILEPATH = Thread.currentThread()
+			.getContextClassLoader().getResource("WSSRFTestFile.xml")
+			.getPath();
+	private static final String FFTRFFILEPATH = Thread.currentThread()
+			.getContextClassLoader()
+			.getResource("TransactionTestFile.csv").getPath();
+
 	
 	private static StockItemMetadata stockItemMetadata = new StockItemMetadata();
 	private static TransactionMetadata transactionMetadata = new TransactionMetadata();
@@ -43,7 +48,7 @@ public class TotalSpendHandlerTest {
 		
 		Double totalSpend = totalSpendHandler.processRequest(transactionMetadata, stockItemMetadata);
 		
-		Assert.assertEquals(131.2,totalSpend);
+		Assert.assertEquals(272.45,totalSpend);
 	}
 
 }

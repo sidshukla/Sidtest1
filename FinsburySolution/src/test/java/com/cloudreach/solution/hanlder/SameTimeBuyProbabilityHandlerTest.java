@@ -20,8 +20,13 @@ public class SameTimeBuyProbabilityHandlerTest {
 	
 	SameTimeBuyProbabilityHandler sameTimeBuyProbabilityHandler = new SameTimeBuyProbabilityHandler();
 	
-	private static final String WSSRFFILEPATH = Thread.currentThread().getContextClassLoader().getResource("WSSRFfileParsingTest.xml").getPath();
-	private static final String FFTRFFILEPATH = Thread.currentThread().getContextClassLoader().getResource("TransactionfileParsingTest.csv").getPath();
+	private static final String WSSRFFILEPATH = Thread.currentThread()
+			.getContextClassLoader().getResource("WSSRFTestFile.xml")
+			.getPath();
+	private static final String FFTRFFILEPATH = Thread.currentThread()
+			.getContextClassLoader()
+			.getResource("TransactionTestFile.csv").getPath();
+
 	
 	private static StockItemMetadata stockItemMetadata = new StockItemMetadata();
 	private static TransactionMetadata transactionMetadata = new TransactionMetadata();

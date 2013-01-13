@@ -19,12 +19,10 @@ import com.cloudreach.solution.parser.impl.WSSRFParserImpl;
 public class TopBrandsBySoldHandlerTest {
 	TopBrandBySoldHandler topBrandBySoldHandler = new TopBrandBySoldHandler();
 
-	private static final String WSSRFFILEPATH = Thread.currentThread()
-			.getContextClassLoader().getResource("WSSRFfileParsingTest.xml")
-			.getPath();
-	private static final String FFTRFFILEPATH = Thread.currentThread()
-			.getContextClassLoader()
-			.getResource("TransactionfileParsingTest.csv").getPath();
+	private static final String WSSRFFILEPATH = Thread.currentThread().getContextClassLoader()
+			.getResource("WSSRFTestFile.xml").getPath();
+	private static final String FFTRFFILEPATH = Thread.currentThread().getContextClassLoader()
+			.getResource("TransactionTestFile.csv").getPath();
 
 	private static StockItemMetadata stockItemMetadata = new StockItemMetadata();
 	private static TransactionMetadata transactionMetadata = new TransactionMetadata();
@@ -45,8 +43,8 @@ public class TopBrandsBySoldHandlerTest {
 
 		List<String> topProducts = topBrandBySoldHandler.processRequest(stockItemMetadata, transactionMetadata, 2);
 
-		Assert.assertEquals("V05", topProducts.get(0));
-		Assert.assertEquals("Alisea",
+		Assert.assertEquals("Pentene", topProducts.get(0));
+		Assert.assertEquals("V05",
 				topProducts.get(1));
 	}
 }

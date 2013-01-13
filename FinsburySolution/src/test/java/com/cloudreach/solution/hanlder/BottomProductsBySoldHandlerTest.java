@@ -20,8 +20,13 @@ public class BottomProductsBySoldHandlerTest {
 	
 	BottomProductsBySoldHandler bottomProductsBySoldHandler = new BottomProductsBySoldHandler();
 	
-	private static final String WSSRFFILEPATH = Thread.currentThread().getContextClassLoader().getResource("WSSRFfileParsingTest.xml").getPath();
-	private static final String FFTRFFILEPATH = Thread.currentThread().getContextClassLoader().getResource("TransactionfileParsingTest.csv").getPath();
+	private static final String WSSRFFILEPATH = Thread.currentThread()
+			.getContextClassLoader().getResource("WSSRFTestFile.xml")
+			.getPath();
+	private static final String FFTRFFILEPATH = Thread.currentThread()
+			.getContextClassLoader()
+			.getResource("TransactionTestFile.csv").getPath();
+
 	
 	private static StockItemMetadata stockItemMetadata = new StockItemMetadata();
 	private static TransactionMetadata transactionMetadata = new TransactionMetadata();
@@ -44,8 +49,8 @@ public class BottomProductsBySoldHandlerTest {
 		List<String> topProducts = bottomProductsBySoldHandler.processRequest(stockItemMetadata, transactionMetadata, 2);
 		
 		
-		Assert.assertEquals("Naturale Italian mineral water", topProducts.get(0));
-		Assert.assertEquals("hair gel - extra strong", topProducts.get(1));
+		Assert.assertEquals("Shaving cream", topProducts.get(0));
+		Assert.assertEquals("Anti dandruff shampoo", topProducts.get(1));
 	}
 
 }

@@ -31,8 +31,8 @@ public class WSSRFParserTest {
 		t1.setEan("0746817152012");
 		t1.setProductName("hair gel - extra strong");
 		t1.setQuantity("150ml");
-		t1.setSellingPrice(6.99);
-		t1.setWholesalePrice(4.30);
+		t1.setSellingPrice(6.2);
+		t1.setWholesalePrice(4.3);
 
 		expectedResponse.add(t2);
 		t2.setBrandName("Alisea");
