@@ -45,11 +45,8 @@ public class TotalProfitHandlerTest {
 	
 	@Test
 	public void testProcesRequest(){
-		
 		Double totalProfit = totalProfitHandler.processRequest(transactionMetadata, stockItemMetadata);
-		
-		Assert.assertEquals(24.050000000000004,totalProfit);
-		
+		Assert.assertEquals(-133.64999999999998,totalProfit);
 	}
 
 }

@@ -6,7 +6,7 @@ public class Product implements Comparable<Product>{
 	
 	private String productName;
 	
-	private Double profit;
+	private Double totalProfit;
 
 	public String getEam() {
 		return eam;
@@ -24,23 +24,23 @@ public class Product implements Comparable<Product>{
 		this.productName = productName;
 	}
 
-	public Double getProfit() {
-		return profit;
-	}
-
-	public void setProfit(Double profit) {
-		this.profit = profit;
-	}
-
 	@Override
 	public int compareTo(Product product) {
-		if(this.profit > product.getProfit()){
+		if(this.totalProfit > product.getTotalProfit()){
 			return -1;
-		}else if(this.profit == product.getProfit()){
+		}else if(this.totalProfit == product.getTotalProfit()){
 			return 0;
 		}else{
 			return 1;
 		} 
+	}
+
+	public Double getTotalProfit() {
+		return totalProfit;
+	}
+
+	public void setTotalProfit(Double totalProfit) {
+		this.totalProfit = totalProfit;
 	}
 
 }

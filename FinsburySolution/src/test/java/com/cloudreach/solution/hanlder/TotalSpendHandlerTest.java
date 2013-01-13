@@ -48,7 +48,7 @@ public class TotalSpendHandlerTest {
 		
 		Double totalSpend = totalSpendHandler.processRequest(transactionMetadata, stockItemMetadata);
 		
-		Assert.assertEquals(272.45,totalSpend);
+		Assert.assertEquals(189.95,totalSpend);
 	}
 
 }
