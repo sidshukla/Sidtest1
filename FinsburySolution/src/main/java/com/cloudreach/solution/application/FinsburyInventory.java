@@ -7,6 +7,7 @@ import java.util.Scanner;
 import com.cloudreach.solution.exception.FinsburyApplicationException;
 import com.cloudreach.solution.handler.BottomBrandBySoldHandler;
 import com.cloudreach.solution.handler.BottomProductsBySoldHandler;
+import com.cloudreach.solution.handler.TotalProfitHandler;
 import com.cloudreach.solution.handler.RequestHandler;
 import com.cloudreach.solution.handler.TopBrandBySoldHandler;
 import com.cloudreach.solution.handler.TopProductsBySoldHandler;
@@ -29,6 +30,7 @@ public class FinsburyInventory {
 	private RequestHandler bottomProductBySoldHandler;
 	private RequestHandler topBrandBySoldHandler;
 	private RequestHandler bottomBrandsBySoldHandler;
+	private TotalProfitHandler profitHandler;
 	
 	private StockItemMetadata stockItemMetadata;
 	private TransactionMetadata transactionMetadata;
@@ -46,6 +48,7 @@ public class FinsburyInventory {
 		bottomProductBySoldHandler = new BottomProductsBySoldHandler();
 		topBrandBySoldHandler = new TopBrandBySoldHandler();
 		bottomBrandsBySoldHandler = new BottomBrandBySoldHandler();
+		profitHandler = new TotalProfitHandler();
 	}
 	
 	public void start(String wssrfFile , String fftrfFile) throws FinsburyApplicationException{
@@ -104,7 +107,10 @@ public class FinsburyInventory {
 				this.outputResult(result4);
 				break;
 			case 5:
-				System.out.println("Not yet implemented");
+				Double totalProfit = profitHandler.processRequest(transactionMetadata);
+				System.out.println("-------------------------------");
+				System.out.println("Total Profit from the sale is " + totalProfit );
+				break;
 			case 6:
 				System.out.println("Not yet implemented");
 			case 7:

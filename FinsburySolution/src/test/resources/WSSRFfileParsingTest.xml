@@ -3,7 +3,7 @@
     <brand>V05</brand>
     <name>hair gel - extra strong</name>
     <quantity>150ml</quantity>
-    <price type="standard-sellthrough" currency="GBP">6.99</price>
+    <price type="standard-sellthrough" currency="GBP">6.20</price>
     <price type="wholesale" currency="GBP">4.30</price>
     <batchsize>24</batchsize>
   </line>
