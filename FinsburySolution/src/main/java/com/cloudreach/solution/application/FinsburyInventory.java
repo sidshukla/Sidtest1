@@ -12,6 +12,7 @@ import com.cloudreach.solution.handler.TotalProfitHandler;
 import com.cloudreach.solution.handler.RequestHandler;
 import com.cloudreach.solution.handler.TopBrandBySoldHandler;
 import com.cloudreach.solution.handler.TopProductsBySoldHandler;
+import com.cloudreach.solution.handler.TotalSpendHandler;
 import com.cloudreach.solution.metadata.StockItemMetadata;
 import com.cloudreach.solution.metadata.TransactionMetadata;
 import com.cloudreach.solution.model.StockItem;
@@ -33,6 +34,7 @@ public class FinsburyInventory {
 	private RequestHandler bottomBrandsBySoldHandler;
 	private TotalProfitHandler profitHandler;
 	private SameTimeBuyProbabilityHandler sameTimeBuyProbabilityHandler;
+	private TotalSpendHandler totalSpendHandler;
 	
 	private StockItemMetadata stockItemMetadata;
 	private TransactionMetadata transactionMetadata;
@@ -52,6 +54,7 @@ public class FinsburyInventory {
 		bottomBrandsBySoldHandler = new BottomBrandBySoldHandler();
 		profitHandler = new TotalProfitHandler();
 		sameTimeBuyProbabilityHandler = new SameTimeBuyProbabilityHandler();
+		totalSpendHandler = new TotalSpendHandler();
 	}
 	
 	public void start(String wssrfFile , String fftrfFile) throws FinsburyApplicationException{
@@ -75,7 +78,8 @@ public class FinsburyInventory {
 			System.out.println("4: Get bottom n brands by numbers sold");
 			System.out.println("5: Get total profit");
 			System.out.println("6: Get probability that a customer will buy two products at the same time");
-			System.out.println("7: Exit");
+			System.out.println("7: Get total spend on WestBun produce");
+			System.out.println("8: Exit");
 			
 			int choice=scanner.nextInt();
 			switch(choice){
@@ -121,6 +125,11 @@ public class FinsburyInventory {
 				System.out.println("The probability that a customer will buy two products at the same time is " + probability );
 				break;
 			case 7:
+				Double totalSpend = totalSpendHandler.processRequest(transactionMetadata, stockItemMetadata);
+				System.out.println("-------------------------------");
+				System.out.println("Total spend on WestBun produce " + totalSpend );
+				break;
+			case 8:
 				exit=true;
 				continue;
 			default:
