@@ -44,7 +44,7 @@ public class FinsburyInventoryTest {
 		//when(fftrfParser.parseInputFile(eq(FFTRFFILE))).thenReturn(mock(TransactionMetadata.class));
 		when(scanner.nextInt()).thenReturn(1);
 		
-		finsburyInventory.start(WSSRFFILE, FFTRFFILE);
+		finsburyInventory.start();
 		verify(productsBySoldHandler.processRequest(mock(StockItemMetadata.class), mock(TransactionMetadata.class), 1));
 		
 	}

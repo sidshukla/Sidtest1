@@ -11,7 +11,7 @@ public class FinsburySolution {
 	public static void main(String[] args) {
 		FinsburyInventory finsburyInventory = new FinsburyInventory();
 		try {
-			finsburyInventory.start(args[0], args[1]);
+			finsburyInventory.start();
 		} catch (FinsburyApplicationException e) {
 			System.out.println("There has been a problem");
 			e.printStackTrace();

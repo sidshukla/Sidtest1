@@ -71,14 +71,20 @@ public class FinsburyInventory {
 	/**
 	 * Start method takes as input the paths to the WestBun XML file and the Finsbury Foods csv file
 	 * It prompts a command line selection menu for the desired output
-	 * @param wssrfFile path
-	 * @param fftrfFile path
-	 * @throws FinsburyApplicationException
+	 * 
+	 *  @throws FinsburyApplicationException
 	 */
-	public void start(String wssrfFile , String fftrfFile) throws FinsburyApplicationException{
+	public void start() throws FinsburyApplicationException{
 		
 		boolean exit=false;
 		
+		System.out.println("========================");
+		System.out.println("Please enter the path to the WSSRF file e.g.: /opt/temp/WSSRFFile.xml");
+		String wssrfFile=scanner.nextLine();
+		
+		System.out.println("========================");
+		System.out.println("Please enter the path to the FFTRFFile file e.g.: /opt/temp/FFTRFFile.csv");
+		String fftrfFile=scanner.nextLine();
 		/*
 		 * Parse the input files and return a list of POJO objects
 		 */
@@ -167,6 +173,7 @@ public class FinsburyInventory {
 				break;
 			case 9:
 				exit=true;
+				System.out.println("***Good Bye***");
 				continue;
 			default:
 				System.out.println("Invalid input. Please try again!!");

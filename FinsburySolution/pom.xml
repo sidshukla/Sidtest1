@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.cloudreach.solution</groupId>
 	<artifactId>FinsburySolution</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>FinsburySolution</name>
 
 	<dependencies>
@@ -51,6 +51,17 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.cloudreach.solution.main.FinsburySolution</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 </project>
