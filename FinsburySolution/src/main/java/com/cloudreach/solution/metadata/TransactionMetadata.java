@@ -95,6 +95,7 @@ public class TransactionMetadata {
 			product.setEam(eam);
 			product.setProductName(stockItemMap.get(eam).getProductName());
 			product.setTotalProfit(totalEarnedByProduct - totalSpendForProduct);
+			product.setStockLeft(batchSize * stockItemMap.get(eam).getBatchSize() - transaction.getQuantity());
 			
 			productsByProfitTempList.add(product);
 			totalSpend = totalSpend + totalSpendForProduct;

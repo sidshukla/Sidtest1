@@ -7,7 +7,9 @@ public class Product implements Comparable<Product>{
 	private String productName;
 	
 	private Double totalProfit;
-
+	
+	private int stockLeft;
+	
 	public String getEam() {
 		return eam;
 	}
@@ -41,6 +43,14 @@ public class Product implements Comparable<Product>{
 
 	public void setTotalProfit(Double totalProfit) {
 		this.totalProfit = totalProfit;
+	}
+
+	public int getStockLeft() {
+		return stockLeft;
+	}
+
+	public void setStockLeft(int stockLeft) {
+		this.stockLeft = stockLeft;
 	}
 
 }

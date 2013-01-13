@@ -8,6 +8,7 @@ import com.cloudreach.solution.exception.FinsburyApplicationException;
 import com.cloudreach.solution.handler.BottomBrandBySoldHandler;
 import com.cloudreach.solution.handler.BottomProductsBySoldHandler;
 import com.cloudreach.solution.handler.SameTimeBuyProbabilityHandler;
+import com.cloudreach.solution.handler.StockLeftHandler;
 import com.cloudreach.solution.handler.TopProductsByProfitHandler;
 import com.cloudreach.solution.handler.TotalProfitHandler;
 import com.cloudreach.solution.handler.RequestHandler;
@@ -44,6 +45,7 @@ public class FinsburyInventory {
 	private TotalProfitHandler profitHandler;
 	private SameTimeBuyProbabilityHandler sameTimeBuyProbabilityHandler;
 	private TotalSpendHandler totalSpendHandler;
+	private StockLeftHandler stockLeftHandler;
 	
 	private StockItemMetadata stockItemMetadata;
 	private TransactionMetadata transactionMetadata;
@@ -65,8 +67,8 @@ public class FinsburyInventory {
 		sameTimeBuyProbabilityHandler = new SameTimeBuyProbabilityHandler();
 		totalSpendHandler = new TotalSpendHandler();
 		topProductsByProfitHandler = new TopProductsByProfitHandler();
+		stockLeftHandler = new StockLeftHandler();
 	}
-	
 	
 	/**
 	 * Start method takes as input the paths to the WestBun XML file and the Finsbury Foods csv file
@@ -111,7 +113,8 @@ public class FinsburyInventory {
 			System.out.println("6: Get probability that a customer will buy two products at the same time");
 			System.out.println("7: Get total spend on WestBun produce");
 			System.out.println("8: Get top n products by profit");
-			System.out.println("9: Exit");
+			System.out.println("9: Get list of items left in stock");
+			System.out.println("10: Exit");
 			
 			int choice=scanner.nextInt();
 			/*
@@ -172,6 +175,12 @@ public class FinsburyInventory {
 				this.outputResult(result5);
 				break;
 			case 9:
+				List<String> result6 = stockLeftHandler.processRequest(transactionMetadata);
+				System.out.println("-------------------------------");
+				System.out.println("List of items left in the stock are :");
+				this.outputResult(result6);
+				break;
+			case 10:
 				exit=true;
 				System.out.println("***Good Bye***");
 				continue;
