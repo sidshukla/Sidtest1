@@ -107,7 +107,7 @@ public class FinsburyInventory {
 				this.outputResult(result4);
 				break;
 			case 5:
-				Double totalProfit = profitHandler.processRequest(transactionMetadata);
+				Double totalProfit = profitHandler.processRequest(transactionMetadata, stockItemMetadata);
 				System.out.println("-------------------------------");
 				System.out.println("Total Profit from the sale is " + totalProfit );
 				break;

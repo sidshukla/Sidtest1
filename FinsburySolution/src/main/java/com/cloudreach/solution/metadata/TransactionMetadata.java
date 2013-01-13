@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.cloudreach.solution.model.Brand;
 import com.cloudreach.solution.model.StockItem;
@@ -16,7 +15,6 @@ public class TransactionMetadata {
 	private Map<String, Transaction> transactionMap = null;
 	private List<Transaction> sortedTransactionOnSold = null;
 	private List<Brand> sortedBrandQuantitySoldList = null;
-	private Double totalProfit = 0.0;
 	
 	public TransactionMetadata() {
 		sortedTransactionOnSold = new ArrayList<Transaction>();
@@ -47,15 +45,6 @@ public class TransactionMetadata {
 		}
 		calculateSortedTransactionList(transactionMap);
 		calculateSortedBrandsList(brandQuantitySoldTempMap);
-		calculateProfit(transactionMap.keySet() , stockItemMap);
-	}
-
-	private void calculateProfit(Set<String> eamSet, Map<String, StockItem> stockItemMap) {
-		Double profit = 0.0;
-		for(String eam :  eamSet){
-			profit = profit + (stockItemMap.get(eam).getSellingPrice() - stockItemMap.get(eam).getWholesalePrice());
-		}
-		this.totalProfit = profit;
 	}
 
 	private void calculateSortedTransactionList(Map<String, Transaction> transactionsMap) {
@@ -93,13 +82,5 @@ public class TransactionMetadata {
 	public void setSortedBrandQuantitySoldList(
 			List<Brand> sortedBrandQuantitySoldMap) {
 		this.sortedBrandQuantitySoldList = sortedBrandQuantitySoldMap;
-	}
-
-	public Double getTotalProfit() {
-		return totalProfit;
-	}
-
-	public void setTotalProfit(Double totalProfit) {
-		this.totalProfit = totalProfit;
 	}
 }
